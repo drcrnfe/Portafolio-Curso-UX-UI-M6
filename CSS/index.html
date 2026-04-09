@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO básico -->
+  <meta name="description" content="Portfolio profesional de Daniel Carreño — Diseñador Gráfico, Editor de Video, UX/UI Designer y especialista en IA & Automatización. Concón, Chile.">
+  <meta name="author" content="Daniel Carreño">
+  <meta name="theme-color" content="#0A0A0A">
+
+  <!-- Open Graph (redes sociales) -->
+  <meta property="og:title"       content="Daniel Carreño — Diseñador & Creador">
+  <meta property="og:description" content="Diseñador gráfico, editor de video y especialista en UX/UI e IA. Portfolio profesional.">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="es_CL">
+
+  <title>Daniel Carreño — Diseñador & Creador</title>
+
+  <!-- Fuentes Google Fonts (Lección 3: Tipografía) -->
+  <!-- Syne 800: titulares display — geométrica, editorial, alta personalidad -->
+  <!-- DM Sans 300/400/500/600: cuerpo — neutral, legible, versátil           -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos externa (Lección 6: Manejo de estilos) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ════ ACCESIBILIDAD: Skip link (WCAG 2.4.1 — A) ════
+       Permite a usuarios de teclado saltar la navegación
+       y pasar directo al contenido principal.              -->
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+  <!-- ════ MENÚ MÓVIL (fullscreen overlay) ════ -->
+  <!-- role="dialog" + aria-modal: lector de pantalla entiende que es un diálogo modal -->
+  <div class="mobile-menu"
+       id="mobileMenu"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Menú de navegación">
+    <button class="mobile-close"
+            onclick="closeMobileMenu()"
+            aria-label="Cerrar menú">✕</button>
+    <nav aria-label="Navegación móvil">
+      <a href="#inicio"      onclick="closeMobileMenu()">Inicio</a>
+      <a href="#sobre-mi"    onclick="closeMobileMenu()">Sobre Mí</a>
+      <a href="#servicios"   onclick="closeMobileMenu()">Servicios</a>
+      <a href="#portafolio"  onclick="closeMobileMenu()">Portafolio</a>
+      <a href="#experiencia" onclick="closeMobileMenu()">Experiencia</a>
+      <a href="#contacto"    onclick="closeMobileMenu()">Contacto</a>
+    </nav>
+  </div>
+
+  <!-- ════ NAVEGACIÓN PRINCIPAL ════ -->
+  <!-- role="banner": landmark ARIA para la cabecera del sitio (WCAG 1.3.1) -->
+  <header role="banner">
+    <nav id="navbar" aria-label="Navegación principal">
+      <a href="#inicio" class="nav-logo" aria-label="Daniel Carreño — Ir al inicio">DC<span aria-hidden="true">.</span></a>
+
+      <!-- Lista de navegación semántica -->
+      <ul class="nav-links" role="list">
+        <li><a href="#sobre-mi">Sobre Mí</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#portafolio">Portafolio</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li>
+          <a href="#contacto"
+             class="nav-cta"
+             aria-label="Ir a la sección de contacto">
+            Contacto <span class="dot" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Botón hamburguesa: aria-expanded comunica el estado al lector de pantalla -->
+      <button class="hamburger"
+              id="hamburgerBtn"
+              onclick="openMobileMenu()"
+              aria-label="Abrir menú de navegación"
+              aria-expanded="false"
+              aria-controls="mobileMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ════ CONTENIDO PRINCIPAL ════ -->
+  <!-- id="contenido-principal": destino del skip link (WCAG 2.4.1) -->
+  <main id="contenido-principal">
+
+    <!-- ── HERO ── -->
+    <!-- Sección introductoria: quién soy, servicios principales y CTA -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <!-- Etiqueta decorativa (aria-hidden porque la info está en el H1) -->
+        <p class="hero-tag" aria-hidden="true">Hey, soy</p>
+
+        <!-- H1: título principal de la página (WCAG 1.3.1) -->
+        <h1 class="hero-title" id="hero-title">
+          Daniel<br>
+          Carreño<br>
+          <!-- em sin cursiva: outline de texto, decorativo -->
+          <em aria-hidden="true">Diseñador.</em>
+        </h1>
+
+        <p class="hero-desc">
+          Creador de contenido visual con más de <strong>10 años de experiencia</strong>
+          en diseño gráfico, edición de video y marketing digital.
+          Actualmente expandiendo hacia <strong>UX/UI e IA</strong>.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#portafolio" class="btn-primary" aria-label="Ver mis proyectos en el portafolio">
+            Ver Portafolio
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#contacto" class="btn-secondary">Hablemos</a>
+        </div>
+
+        <!-- Lista de especialidades (semántica: ul/li) -->
+        <ul class="hero-services" aria-label="Mis especialidades" role="list">
+          <li class="service-item">
+            <span class="service-num" aria-hidden="true">#01</span>
+            <span class="service-label">Diseño Gráfico & Branding</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num" aria-hidden="true">#02</span>
+            <span class="service-label">Video & Reels</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num" aria-hidden="true">#03</span>
+            <span class="service-label">UX/UI Design</span>
+          </li>
+          <li class="service-item">
+            <span class="service-num" aria-hidden="true">#04</span>
+            <span class="service-label">IA & Automatización</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Imagen / foto profesional -->
+      <div class="hero-visual" role="img" aria-label="Foto profesional de Daniel Carreño">
+        <div class="hero-image-wrap">
+          <img src="../Assets/imagenes/foto-daniel.jpg" alt="Daniel Carreño, diseñador gráfico" width="800" height="900" loading="eager">
+        </div>
+        <!-- Tarjeta flotante con logro destacado -->
+        <aside class="hero-overlay-card" aria-label="Logro destacado">
+          <p class="overlay-stat-num">+50%</p>
+          <p class="overlay-stat-label">Aumento en alcance<br>para clientes</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── MARQUEE de habilidades (decorativo, no esencial) ── -->
+    <div class="marquee-section" aria-hidden="true" role="presentation">
+      <div class="marquee-track">
+        <span class="marquee-item"><span class="marquee-dot"></span>Adobe Creative Suite</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Motion Graphics</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Content Creator</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>UX / UI Design</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Video Editing</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Branding</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>AI &amp; Automation</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Social Media</span>
+        <!-- Duplicado para loop continuo -->
+        <span class="marquee-item"><span class="marquee-dot"></span>Adobe Creative Suite</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Motion Graphics</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Content Creator</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>UX / UI Design</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Video Editing</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Branding</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>AI &amp; Automation</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Social Media</span>
+      </div>
+    </div>
+
+    <!-- ── SOBRE MÍ ── -->
+    <section class="about-section" id="sobre-mi" aria-labelledby="about-title">
+      <div class="about-text fade-in">
+        <p class="section-tag" aria-hidden="true">Sobre Mí</p>
+        <h2 class="section-title" id="about-title">Diseño que impulsa negocios reales</h2>
+
+        <p class="about-description">
+          Soy un <strong>profesional multidisciplinario</strong> con sólida experiencia en
+          comunicación visual, producción audiovisual y marketing digital. Actualmente
+          estudiando <strong>UX/UI Design</strong> y manejando herramientas de IA generativa
+          para potenciar cada proyecto.
+        </p>
+        <p class="about-description">
+          Mi enfoque: crear piezas que no solo se ven bien, sino que
+          <strong>generan resultados medibles</strong>. Trabajo desde la
+          conceptualización hasta la ejecución con precisión y criterio estratégico.
+        </p>
+
+        <!-- Estadísticas numéricas -->
+        <dl class="about-stats" aria-label="Estadísticas profesionales">
+          <div class="stat-card">
+            <dt class="stat-label">Años de experiencia en diseño &amp; producción</dt>
+            <dd class="stat-num">+15</dd>
+          </div>
+          <div class="stat-card">
+            <dt class="stat-label">Incremento promedio en visualizaciones</dt>
+            <dd class="stat-num">+50%</dd>
+          </div>
+          <div class="stat-card">
+            <dt class="stat-label">Formatos entregados a clientes</dt>
+            <dd class="stat-num">100%</dd>
+          </div>
+          <div class="stat-card">
+            <dt class="stat-label">Especialidades activas en paralelo</dt>
+            <dd class="stat-num">4</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="about-visual fade-in">
+        <img src="../Assets/imagenes/retrato.jpg" alt="Daniel Carreño en su entorno de trabajo" width="600" height="750" loading="lazy">
+
+        <!-- Herramientas / habilidades como lista -->
+        <ul class="skills-pills"
+            aria-label="Herramientas que manejo"
+            role="list">
+          <li class="skill-pill">After Effects</li>
+          <li class="skill-pill">Premiere Pro</li>
+          <li class="skill-pill">Photoshop</li>
+          <li class="skill-pill">Illustrator</li>
+          <li class="skill-pill">Figma</li>
+          <li class="skill-pill">Make / n8n</li>
+          <li class="skill-pill">Midjourney</li>
+          <li class="skill-pill">ChatGPT</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── SERVICIOS ── -->
+    <section class="services-section fade-in" id="servicios" aria-labelledby="services-title">
+      <div>
+        <p class="section-tag" aria-hidden="true">Servicios</p>
+        <h2 class="section-title" id="services-title">Lo que puedo hacer por tu marca</h2>
+      </div>
+      <p class="services-desc">
+        Cuatro especialidades que se complementan para entregar soluciones creativas
+        completas, desde la identidad visual hasta la automatización de procesos.
+      </p>
+
+      <!-- Lista de servicios (semántica: ul/li en lugar de divs) -->
+      <ul class="services-grid" role="list">
+        <li class="service-card fade-in">
+          <span class="service-icon" aria-hidden="true">🎨</span>
+          <span class="service-card-num" aria-hidden="true">#01</span>
+          <h3 class="service-card-title">Diseño Gráfico &amp; Branding</h3>
+          <p class="service-card-desc">Identidad visual, logos, sistemas de marca y piezas para redes sociales. Diseño con criterio estratégico y alto impacto visual.</p>
+          <ul class="service-tags" aria-label="Tecnologías" role="list">
+            <li class="service-tag">Logo</li>
+            <li class="service-tag">Identidad</li>
+            <li class="service-tag">Social Media</li>
+          </ul>
+        </li>
+
+        <li class="service-card fade-in">
+          <span class="service-icon" aria-hidden="true">🎬</span>
+          <span class="service-card-num" aria-hidden="true">#02</span>
+          <h3 class="service-card-title">Edición de Video &amp; Reels</h3>
+          <p class="service-card-desc">Producción de contenido audiovisual de alto impacto: reels, stories, spots publicitarios y motion graphics para destacar en cualquier plataforma.</p>
+          <ul class="service-tags" aria-label="Tecnologías" role="list">
+            <li class="service-tag">Reels</li>
+            <li class="service-tag">Spots TV</li>
+            <li class="service-tag">Motion</li>
+          </ul>
+        </li>
+
+        <li class="service-card fade-in">
+          <span class="service-icon" aria-hidden="true">📱</span>
+          <span class="service-card-num" aria-hidden="true">#03</span>
+          <h3 class="service-card-title">UX/UI Design</h3>
+          <p class="service-card-desc">Diseño de interfaces digitales centradas en el usuario. Desde wireframes y prototipos hasta diseños de alta fidelidad en Figma.</p>
+          <ul class="service-tags" aria-label="Tecnologías" role="list">
+            <li class="service-tag">Figma</li>
+            <li class="service-tag">Wireframes</li>
+            <li class="service-tag">Prototipos</li>
+          </ul>
+        </li>
+
+        <li class="service-card fade-in">
+          <span class="service-icon" aria-hidden="true">🤖</span>
+          <span class="service-card-num" aria-hidden="true">#04</span>
+          <h3 class="service-card-title">IA &amp; Automatización</h3>
+          <p class="service-card-desc">Uso estratégico de herramientas de IA generativa y flujos automatizados para optimizar procesos creativos y de marketing digital.</p>
+          <ul class="service-tags" aria-label="Tecnologías" role="list">
+            <li class="service-tag">ChatGPT</li>
+            <li class="service-tag">Make</li>
+            <li class="service-tag">Midjourney</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── PORTAFOLIO ── -->
+    <section class="portfolio-section fade-in" id="portafolio" aria-labelledby="portfolio-title">
+      <div>
+        <p class="section-tag" aria-hidden="true">Portafolio</p>
+        <h2 class="section-title" id="portfolio-title">Proyectos destacados</h2>
+      </div>
+
+      <!-- Filtros: aria-pressed indica el estado activo al lector -->
+      <div class="portfolio-filter" role="group" aria-label="Filtrar proyectos por categoría">
+        <button class="filter-btn active"
+                onclick="filterProjects(this,'all')"
+                aria-pressed="true">Todos</button>
+        <button class="filter-btn"
+                onclick="filterProjects(this,'branding')"
+                aria-pressed="false">Branding</button>
+        <button class="filter-btn"
+                onclick="filterProjects(this,'video')"
+                aria-pressed="false">Video</button>
+        <button class="filter-btn"
+                onclick="filterProjects(this,'uxui')"
+                aria-pressed="false">UX/UI</button>
+      </div>
+
+      <!-- Lista de proyectos -->
+      <ul class="portfolio-grid" id="projectGrid" role="list" aria-live="polite" aria-label="Lista de proyectos">
+
+        <!-- Proyecto real: Agencia Fe Marketing -->
+        <li class="project-card" data-cat="branding">
+          <div class="project-thumb">
+            <img src="../Assets/imagenes/proyecto-fe-marketing.jpg" alt="Proyecto Agencia Fe Marketing: diseño de contenido para redes sociales" width="600" height="375" loading="lazy">
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">Branding · Social Media</p>
+            <h3 class="project-title">Agencia Fe Marketing</h3>
+            <p class="project-desc">Diseño de contenido gráfico y video para clientes. +50% en visualizaciones en redes sociales.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2023</time> — Presente</span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+        <!-- Proyecto real: Leyenda VFX -->
+        <li class="project-card" data-cat="video">
+          <div class="project-thumb">
+            <img src="../Assets/imagenes/proyecto-leyenda-vfx.jpg" alt="Coordinación de postproducción en Leyenda VFX para spots de TV" width="600" height="375" loading="lazy">
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">Post-Producción · VFX</p>
+            <h3 class="project-title">Leyenda VFX</h3>
+            <p class="project-desc">Coordinación de flujo de trabajo audiovisual para spots de TV abierta. 100% de formatos entregados.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2010</time> — <time>2015</time></span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+        <!-- Placeholder UX/UI -->
+        <li class="project-card placeholder" data-cat="uxui" aria-label="Proyecto UX/UI en desarrollo">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:var(--bg-3);" aria-hidden="true">
+              <span>📱</span>
+              <p class="project-thumb-note">Tu proyecto UX/UI aquí</p>
+            </div>
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">UX/UI Design</p>
+            <h3 class="project-title">Proyecto en curso</h3>
+            <p class="project-desc">Próximamente: caso de estudio de diseño de interfaz y experiencia de usuario.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2024</time> — <time>2025</time></span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+        <!-- Placeholder Branding -->
+        <li class="project-card placeholder" data-cat="branding" aria-label="Proyecto de branding próximamente">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:var(--bg-3);" aria-hidden="true">
+              <span>🎨</span>
+              <p class="project-thumb-note">Imagen de proyecto</p>
+            </div>
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">Identidad Visual</p>
+            <h3 class="project-title">Próximo caso de estudio</h3>
+            <p class="project-desc">Espacio para un proyecto de branding o identidad visual completa.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2024</time></span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+        <!-- Placeholder Video -->
+        <li class="project-card placeholder" data-cat="video" aria-label="Demo Reel próximamente">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:var(--bg-3);" aria-hidden="true">
+              <span>🎞️</span>
+              <p class="project-thumb-note">Demo reel o proyecto de video</p>
+            </div>
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">Video · Motion</p>
+            <h3 class="project-title">Demo Reel 2024</h3>
+            <p class="project-desc">Compilación de trabajos audiovisuales y piezas de motion graphics.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2024</time></span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+        <!-- Placeholder IA -->
+        <li class="project-card placeholder" data-cat="uxui" aria-label="Proyecto de IA y automatización próximamente">
+          <div class="project-thumb">
+            <div class="project-thumb-bg" style="background:var(--bg-3);" aria-hidden="true">
+              <span>🤖</span>
+              <p class="project-thumb-note">Proyecto con IA o automatización</p>
+            </div>
+            <div class="project-overlay" aria-hidden="true">
+              <button class="project-overlay-btn" tabindex="-1">Ver proyecto →</button>
+            </div>
+          </div>
+          <div class="project-info">
+            <p class="project-category">IA · Automatización</p>
+            <h3 class="project-title">Flujo Automatizado</h3>
+            <p class="project-desc">Caso de uso de herramientas IA aplicadas a procesos creativos y de marketing.</p>
+            <footer class="project-meta">
+              <span class="project-year"><time>2024</time></span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </footer>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- ── EXPERIENCIA & EDUCACIÓN ── -->
+    <section class="experience-section" id="experiencia" aria-labelledby="exp-title">
+      <div class="exp-grid">
+
+        <!-- Experiencia laboral -->
+        <div>
+          <p class="section-tag fade-in" aria-hidden="true">Trayectoria</p>
+          <h2 class="section-title fade-in" id="exp-title">Experiencia &amp; Formación</h2>
+
+          <!-- Cada trabajo como article (contenido autónomo) -->
+          <article class="exp-item fade-in" aria-label="Trabajo: Agencia Fe Marketing">
+            <span class="exp-dot" aria-hidden="true"></span>
+            <div>
+              <p class="exp-date"><time datetime="2023-11">Nov 2023</time> — Presente</p>
+              <h3 class="exp-role">Creador de Contenido, Diseñador &amp; Editor</h3>
+              <p class="exp-company">Agencia Fe Marketing</p>
+              <p class="exp-desc">Diseño de contenido gráfico y video para clientes de la agencia: posts, stories y reels.</p>
+              <p class="exp-highlight" role="note">↑ +50% visualizaciones en RRSS</p>
+            </div>
+          </article>
+
+          <article class="exp-item fade-in" aria-label="Trabajo: Leyenda VFX">
+            <span class="exp-dot" aria-hidden="true"></span>
+            <div>
+              <p class="exp-date"><time datetime="2010-02">Febrero 2010</time> — <time datetime="2015">2015</time></p>
+              <h3 class="exp-role">Coordinador de Post-Producción</h3>
+              <p class="exp-company">Leyenda VFX</p>
+              <p class="exp-desc">Coordinación del flujo de trabajo de video para spots de TV abierta, desde concepto hasta formato final.</p>
+              <p class="exp-highlight" role="note">✓ 100% formatos entregados</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Educación -->
+        <div>
+          <h2 class="section-title fade-in" style="font-size:28px;margin-bottom:28px;">Educación &amp; Cursos</h2>
+
+          <ul class="education-list" role="list" aria-label="Historial educativo">
+
+            <li class="edu-card fade-in">
+              <p class="edu-year"><time>1997</time> — <time>2001</time></p>
+              <h3 class="edu-degree">Comunicación Audiovisual, mención Postproducción</h3>
+              <p class="edu-school">DUOC UC, Sede San Carlos de Apoquindo</p>
+            </li>
+
+            <li class="edu-card fade-in">
+              <p class="edu-year"><time>2015</time></p>
+              <h3 class="edu-degree">Diplomado en Producción Ejecutiva Audiovisual</h3>
+              <p class="edu-school">Pontificia Universidad Católica de Chile</p>
+            </li>
+
+            <li class="edu-card fade-in">
+              <p class="edu-year">En curso</p>
+              <h3 class="edu-degree">UX/UI Designer</h3>
+              <p class="edu-school">Formación activa en diseño de experiencias digitales</p>
+            </li>
+
+            <li class="edu-card fade-in">
+              <p class="edu-year">Especializaciones</p>
+              <h3 class="edu-degree">Digital Ad Expert · Growth Hacking · IA para Pymes</h3>
+              <p class="edu-school">Aleph Viña Del Mar · AIEP · CENECA SOFOFA</p>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── HERRAMIENTAS ── -->
+    <section class="tools-section fade-in" id="tools-title">
+      <p class="section-tag" aria-hidden="true">Herramientas</p>
+      <h2 class="section-title" id="tools-title">Mi stack creativo</h2>
+
+      <ul class="tools-grid" role="list" aria-label="Herramientas y software que manejo">
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">🎨</span>
+          <p class="tool-name">Photoshop</p>
+          <p class="tool-category">Adobe · Edición imagen</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">✏️</span>
+          <p class="tool-name">Illustrator</p>
+          <p class="tool-category">Adobe · Diseño vectorial</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">🎬</span>
+          <p class="tool-name">Premiere Pro</p>
+          <p class="tool-category">Adobe · Edición video</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">✨</span>
+          <p class="tool-name">After Effects</p>
+          <p class="tool-category">Adobe · Motion graphics</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">🖼️</span>
+          <p class="tool-name">Figma</p>
+          <p class="tool-category">UX/UI · Prototipado</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">🤖</span>
+          <p class="tool-name">ChatGPT / Claude</p>
+          <p class="tool-category">IA · Generación de contenido</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">🌅</span>
+          <p class="tool-name">Midjourney</p>
+          <p class="tool-category">IA · Imagen generativa</p>
+        </li>
+        <li class="tool-card fade-in">
+          <span class="tool-icon" aria-hidden="true">⚡</span>
+          <p class="tool-name">Make / n8n</p>
+          <p class="tool-category">Automatización · Flujos</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── CONTACTO ── -->
+    <section class="contact-section fade-in" id="contacto" aria-labelledby="contact-title">
+      <p class="section-tag" aria-hidden="true">Contacto</p>
+      <h2 class="contact-title" id="contact-title">
+        Hagamos algo<br><em>memorable.</em>
+      </h2>
+      <p class="contact-desc">
+        ¿Tienes un proyecto creativo, una marca que construir o un contenido que
+        necesita destacar? Conversemos y encontremos la mejor solución juntos.
+      </p>
+
+      <div class="contact-links">
+        <a href="mailto:danielrodrigo.carreno.riveros@gmail.com"
+           class="contact-btn contact-btn-primary"
+           aria-label="Enviar email a Daniel Carreño">
+          ✉ Enviar email
+        </a>
+        <a href="https://www.linkedin.com/in/drcrnfe/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-btn contact-btn-secondary"
+           aria-label="Visitar perfil de LinkedIn de Daniel Carreño (abre en nueva pestaña)">
+          in LinkedIn
+        </a>
+        <a href="tel:+56945866468"
+           class="contact-btn contact-btn-secondary"
+           aria-label="Llamar a Daniel Carreño al +56 9 4586 6468">
+          📞 Llamar
+        </a>
+      </div>
+
+      <!-- Información de contacto adicional -->
+      <address class="contact-info" aria-label="Información de contacto">
+        <span class="contact-info-item">
+          <span class="ci-dot" aria-hidden="true"></span>
+          <span>Concón, Valparaíso, Chile</span>
+        </span>
+        <span class="contact-info-item">
+          <span class="ci-dot" aria-hidden="true"></span>
+          <a href="mailto:danielrodrigo.carreno.riveros@gmail.com">
+            danielrodrigo.carreno.riveros@gmail.com
+          </a>
+        </span>
+        <span class="contact-info-item">
+          <span class="ci-dot" aria-hidden="true"></span>
+          <a href="tel:+56945866468">(56) 9 4586 6468</a>
+        </span>
+      </address>
+    </section>
+
+  </main><!-- fin #contenido-principal -->
+
+  <!-- ════ PIE DE PÁGINA ════ -->
+  <footer role="contentinfo">
+    <a href="#inicio" class="footer-logo" aria-label="Volver al inicio">DC<span aria-hidden="true">.</span></a>
+    <small class="footer-copy">© <time datetime="2025">2025</time> Daniel Carreño. Todos los derechos reservados.</small>
+    <nav aria-label="Navegación secundaria">
+      <ul class="footer-links" role="list">
+        <li><a href="#sobre-mi">Sobre Mí</a></li>
+        <li><a href="#portafolio">Portafolio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <!-- ════ JAVASCRIPT ════ -->
+  <script>
+    /* ── Menú móvil ──────────────────────────── */
+    function openMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn  = document.getElementById('hamburgerBtn');
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      // Foco al botón de cerrar (accesibilidad teclado)
+      menu.querySelector('.mobile-close').focus();
+    }
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn  = document.getElementById('hamburgerBtn');
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+    // Cerrar con tecla Escape (WCAG 2.1.2)
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    /* ── Fade-in al hacer scroll (IntersectionObserver) ── */
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ── Filtro del portafolio ──────────────────
+       Actualiza aria-pressed para comunicar el
+       estado activo al lector de pantalla.        */
+    function filterProjects(btn, cat) {
+      // Actualizar botones
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      // Mostrar/ocultar cards
+      document.querySelectorAll('.project-card').forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = show ? '' : 'none';
+      });
+    }
+
+    /* ── Scroll suave con offset para nav fijo ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const top = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
