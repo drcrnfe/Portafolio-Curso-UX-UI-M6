@@ -1,0 +1,1183 @@
+/* ================================================================
+   PORTFOLIO — Daniel Carreño | UX/UI Designer & Creador Visual
+   Módulo 6 — Fundamentos del Diseño Visual y Desarrollo Web
+   Alkemy — 2025
+   ================================================================
+   ESTRUCTURA:
+   1.  Variables CSS (sistema de diseño)
+   2.  Reset & box model
+   3.  Base tipográfica
+   4.  Layout y utilidades
+   5.  Navegación
+   6.  Hero
+   7.  Marquee
+   8.  Sobre mí
+   9.  Servicios
+   10. Portafolio
+   11. Experiencia & Formación
+   12. Herramientas
+   13. Contacto
+   14. Footer
+   15. Responsivo — Media queries (Lección 7)
+   16. Accesibilidad & utilidades
+   ================================================================ */
+
+
+/* ================================================================
+   1. VARIABLES CSS — Sistema de diseño centralizado
+   Paleta definida en Lección 2 — Teoría del color
+   Tipografía definida en Lección 3 — Tipografía
+   ================================================================ */
+:root {
+  /* — Colores (Lección 2: esquema análogo cálido) — */
+  --color-bg:           #0D0D0D;   /* Fondo base — 60% dominante */
+  --color-bg-2:         #111111;   /* Fondo secundario — cards, nav */
+  --color-bg-card:      #161616;   /* Cards y surfaces elevadas */
+  --color-acento:       #F24E29;   /* Acento principal — 10% — naranja-rojo vibrante */
+  --color-acento-dark:  #733B1A;   /* Análogo oscuro — bordes, tags, eyebrows */
+  --color-acento-hover: #D94320;   /* Hover del acento */
+  --color-texto:        #F2F2F2;   /* Texto primario — blanco suave */
+  --color-texto-2:      #888888;   /* Texto secundario — muted */
+  --color-texto-3:      #444444;   /* Texto terciario — muy muted */
+  --color-borde:        #1A1A1A;   /* Bordes sutiles */
+  --color-borde-2:      #222222;   /* Bordes interactivos */
+
+  /* — Tipografía (Lección 3: Syne + DM Sans) — */
+  --fuente-display: 'Syne', sans-serif;     /* Headings H1–H4 — geométrica experimental */
+  --fuente-cuerpo:  'DM Sans', sans-serif;  /* Body, UI, botones — humanista moderna */
+
+  /* — Escala tipográfica Major Third ×1.25 (base 16px) — */
+  --t-xs:   0.688rem;  /*  11px — labels, captions */
+  --t-sm:   0.75rem;   /*  12px — tags, metadata */
+  --t-base: 1rem;      /*  16px — body base */
+  --t-md:   1.125rem;  /*  18px — body large */
+  --t-lg:   1.25rem;   /*  20px — H4 */
+  --t-xl:   1.5rem;    /*  24px — H3 */
+  --t-2xl:  2rem;      /*  32px — stat numbers */
+  --t-3xl:  2.5rem;    /*  40px — H2 section */
+  --t-4xl:  3rem;      /*  48px — H2 principal */
+  --t-hero: 5rem;      /*  80px — H1 display */
+
+  /* — Espaciado — */
+  --s-xs:  0.5rem;    /*  8px */
+  --s-sm:  1rem;      /* 16px */
+  --s-md:  1.5rem;    /* 24px */
+  --s-lg:  3rem;      /* 48px */
+  --s-xl:  5rem;      /* 80px */
+  --s-2xl: 7.5rem;    /* 120px — padding secciones */
+
+  /* — Layout — */
+  --max-w:    1200px;
+  --pad-h:    5rem;    /* 80px padding horizontal desktop */
+  --r-sm:     4px;
+  --r-md:     6px;
+  --r-lg:     10px;
+  --r-xl:     16px;
+
+  /* — Transición global — */
+  --ease: 0.2s ease;
+}
+
+
+/* — Importar fuentes Google Fonts — */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+   ================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;  /* scroll suave para anclas internas */
+  font-size: 16px;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol { list-style: none; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+
+/* ================================================================
+   3. BASE TIPOGRÁFICA — aplica fuentes y colores globales
+   ================================================================ */
+body {
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--t-base);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-texto);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Jerarquía de headings — Space Grotesk bold */
+h1, h2, h3, h4 {
+  font-family: var(--fuente-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-texto);
+}
+
+h1 { font-size: var(--t-hero);  letter-spacing: -0.03em; }
+h2 { font-size: var(--t-4xl);  }
+h3 { font-size: var(--t-xl);   }
+h4 { font-size: var(--t-lg);   font-weight: 600; }
+
+p  { color: var(--color-texto-2); line-height: 1.7; }
+
+
+/* ================================================================
+   4. LAYOUT Y UTILIDADES
+   ================================================================ */
+
+/* Eyebrow — label sobre títulos de sección (Figma: SectionTag) */
+.eyebrow {
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-acento-dark);
+  margin-bottom: var(--s-xs);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 1.5px;
+  background-color: var(--color-acento-dark);
+  flex-shrink: 0;
+}
+
+/* Header de sección reutilizable */
+.seccion-header { margin-bottom: var(--s-lg); }
+.seccion-header h2 { margin-bottom: var(--s-sm); }
+.seccion-descripcion {
+  font-size: var(--t-md);
+  color: var(--color-texto-2);
+  max-width: 560px;
+}
+
+/* Cada section con padding y max-width */
+section {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* Accesibilidad: oculto visualmente, visible para screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ================================================================
+   5. BOTONES — componentes reutilizables
+   ================================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-xs);
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--t-base);
+  font-weight: 600;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--r-md);
+  transition: all var(--ease);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-primario {
+  background-color: var(--color-acento);
+  color: var(--color-bg);
+  border: 1.5px solid var(--color-acento);
+}
+.btn-primario:hover {
+  background-color: var(--color-acento-hover);
+  border-color: var(--color-acento-hover);
+  transform: scale(0.98);
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--color-texto);
+  border: 0.5px solid var(--color-borde-2);
+}
+.btn-secundario:hover {
+  border-color: var(--color-acento);
+  color: var(--color-acento);
+}
+
+
+/* ================================================================
+   6. NAVEGACIÓN — sticky, backdrop blur
+   ================================================================ */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background-color: rgba(13, 13, 13, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--color-borde);
+}
+
+.nav-principal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-h);
+  height: 64px;
+}
+
+.nav-logo {
+  font-family: var(--fuente-display);
+  font-size: var(--t-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-texto);
+  transition: color var(--ease);
+}
+.nav-logo:hover { color: var(--color-acento); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-lg);
+}
+.nav-links a {
+  font-size: var(--t-sm);
+  color: var(--color-texto-2);
+  transition: color var(--ease);
+}
+.nav-links a:hover { color: var(--color-texto); }
+
+/* CTA en nav */
+.nav-cta {
+  background-color: var(--color-acento) !important;
+  color: var(--color-bg) !important;
+  font-weight: 600 !important;
+  padding: 0.45rem 1rem;
+  border-radius: var(--r-md);
+  font-size: var(--t-sm) !important;
+  transition: background-color var(--ease), transform var(--ease) !important;
+}
+.nav-cta:hover {
+  background-color: var(--color-acento-hover) !important;
+  transform: scale(0.97);
+}
+
+/* Hamburger — oculto en desktop, visible en mobile */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background-color: var(--color-texto);
+  border-radius: 1px;
+  transition: all var(--ease);
+}
+
+
+/* ================================================================
+   7. HERO — 2 columnas, texto izq, imagen der
+   Figma: Hero frame 1920×873
+   ================================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding-top: calc(var(--s-2xl) + 64px); /* compensa nav fija */
+  padding-bottom: var(--s-2xl);
+  padding-left: var(--pad-h);
+  padding-right: var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* H1 — máxima jerarquía, una sola vez en la página */
+.hero-titulo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--s-md);
+}
+
+/* Variante outline del H1 (Figma: EditableText2 / EditableText3) */
+.titulo-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-borde-2);
+  font-size: var(--t-hero);
+  font-family: var(--fuente-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  transition: -webkit-text-stroke-color var(--ease);
+}
+.titulo-outline:hover { -webkit-text-stroke-color: var(--color-acento-dark); }
+
+/* Segunda variante outline — tamaño reducido */
+.titulo-outline--sm { font-size: calc(var(--t-hero) * 0.55); }
+
+.hero-descripcion {
+  font-size: var(--t-md);
+  max-width: 460px;
+  margin-bottom: var(--s-md);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: var(--s-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-lg);
+}
+
+/* Especialidades numeradas (Figma: Container9) */
+.hero-especialidades {
+  display: flex;
+  gap: var(--s-lg);
+  flex-wrap: wrap;
+  padding-top: var(--s-md);
+  border-top: 0.5px solid var(--color-borde);
+}
+.especialidad {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.esp-num {
+  font-size: var(--t-xs);
+  color: var(--color-texto-3);
+  font-weight: 500;
+}
+.esp-label {
+  font-size: var(--t-sm);
+  color: var(--color-texto-2);
+  font-weight: 400;
+}
+
+/* Columna imagen */
+.hero-imagen-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.foto-perfil {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--r-xl);
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  border: 0.5px solid var(--color-borde-2);
+}
+
+/* Stat flotante (Figma: Container20, bottom-right de imagen) */
+.stat-flotante {
+  position: absolute;
+  bottom: 24px;
+  right: -16px;
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-borde-2);
+  border-radius: var(--r-lg);
+  padding: var(--s-sm) var(--s-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 174px;
+}
+.stat-flotante-num {
+  font-family: var(--fuente-display);
+  font-size: var(--t-2xl);
+  font-weight: 700;
+  color: var(--color-acento);
+  line-height: 1;
+}
+.stat-flotante-label {
+  font-size: var(--t-xs);
+  color: var(--color-texto-2);
+  line-height: 1.4;
+}
+
+
+/* ================================================================
+   8. MARQUEE — banda animada de skills
+   Figma: Marquee frame
+   ================================================================ */
+
+/* El marquee abarca todo el ancho — no usa max-width de section */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border-top: 0.5px solid var(--color-borde);
+  border-bottom: 0.5px solid var(--color-borde);
+  padding: 14px 0;
+  background: var(--color-bg);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: scroll-marquee 28s linear infinite;
+}
+
+.marquee-track span {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--color-texto-2);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+@keyframes scroll-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+/* ================================================================
+   9. SOBRE MÍ — 2 cols: texto+stats izq, foto+pills der
+   Figma: About frame
+   ================================================================ */
+.sobre-mi {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.sobre-mi-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.sobre-mi-p {
+  margin-bottom: var(--s-sm);
+  font-size: var(--t-md);
+}
+
+/* Stats 2×2 (Figma: 4 StatCards) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-sm);
+  margin-top: var(--s-lg);
+}
+
+.stat-card {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-borde);
+  border-radius: var(--r-lg);
+  padding: var(--s-sm) var(--s-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-num {
+  font-family: var(--fuente-display);
+  font-size: var(--t-2xl);
+  font-weight: 700;
+  color: var(--color-acento);
+  line-height: 1;
+}
+
+.stat-desc {
+  font-size: var(--t-xs);
+  color: var(--color-texto-2);
+  line-height: 1.4;
+}
+
+/* Foto y stack pills (Figma: Container49 + Container52) */
+.sobre-mi-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-sm);
+}
+
+.foto-wrap {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 0.5px solid var(--color-borde-2);
+  aspect-ratio: 4 / 5;
+}
+.foto-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Pills row del stack (Figma: Container52 row) */
+.stack-pills {
+  display: flex;
+  gap: var(--s-xs);
+  flex-wrap: wrap;
+}
+.stack-pills span {
+  font-size: var(--t-xs);
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  border: 0.5px solid var(--color-borde-2);
+  color: var(--color-texto-2);
+  letter-spacing: 0.04em;
+  background: var(--color-bg-card);
+}
+
+
+/* ================================================================
+   10. SERVICIOS — header 2 cols + grid 4 cards
+   Figma: Services frame
+   ================================================================ */
+.servicios {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  /* Sección con fondo levemente diferente para separar visualmente */
+  background: var(--color-bg);
+}
+
+/* Header con 2 cols (izq: label+h2, der: descripción) */
+.servicios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s-lg);
+}
+
+/* Grid 4 columnas (Figma: 4 ServiceCards) */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-md);
+}
+
+.servicio-card {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-borde);
+  border-radius: var(--r-lg);
+  padding: var(--s-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-xs);
+  transition: border-color var(--ease), transform var(--ease);
+  position: relative;
+}
+.servicio-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1.5px;
+  background: var(--color-acento);
+  transform: scaleX(0);
+  transition: transform var(--ease);
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+}
+.servicio-card:hover { border-color: var(--color-acento-dark); transform: translateY(-4px); }
+.servicio-card:hover::before { transform: scaleX(1); }
+
+.servicio-icono {
+  font-size: 1.5rem;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(242, 78, 41, 0.1);
+  border: 0.5px solid rgba(242, 78, 41, 0.2);
+  border-radius: var(--r-md);
+  margin-bottom: var(--s-sm);
+}
+
+.servicio-num {
+  font-size: var(--t-xs);
+  color: var(--color-texto-3);
+  font-weight: 500;
+  font-family: var(--fuente-cuerpo);
+}
+
+.servicio-card h3 {
+  font-size: var(--t-base);
+  letter-spacing: 0;
+  margin-bottom: 2px;
+}
+
+.servicio-card p { font-size: var(--t-sm); line-height: 1.6; flex: 1; }
+
+.servicio-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: var(--s-sm);
+  padding-top: var(--s-sm);
+  border-top: 0.5px solid var(--color-borde);
+}
+.servicio-tags span {
+  font-size: var(--t-xs);
+  padding: 3px 8px;
+  border-radius: var(--r-sm);
+  border: 0.5px solid var(--color-borde-2);
+  color: var(--color-texto-2);
+}
+
+
+/* ================================================================
+   11. PORTAFOLIO — grid 3 cols, filtros, project cards
+   Figma: Portfolio frame
+   ================================================================ */
+.portafolio {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* Header portafolio: h2 izq, filtros der */
+.portafolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s-md);
+}
+
+.portafolio-filtros {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filtro {
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--r-sm);
+  border: 0.5px solid var(--color-borde-2);
+  color: var(--color-texto-2);
+  background: transparent;
+  transition: all var(--ease);
+}
+.filtro:hover  { border-color: var(--color-acento); color: var(--color-acento); }
+.filtro.activo { background: var(--color-acento); border-color: var(--color-acento); color: var(--color-bg); }
+
+/* Grid 3 col de proyectos (Figma: Container75) */
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-md);
+  margin-top: var(--s-lg);
+}
+
+.proyecto-card {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-borde);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color var(--ease), transform var(--ease);
+}
+.proyecto-card:hover { border-color: var(--color-borde-2); transform: translateY(-6px); }
+
+/* Figura imagen con aspect ratio 16:9 */
+.proyecto-imagen {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  background: var(--color-bg-2);
+}
+.proyecto-imagen img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.proyecto-card:hover .proyecto-imagen img { transform: scale(1.04); }
+
+.proyecto-info {
+  padding: var(--s-sm) var(--s-md);
+}
+
+.proyecto-categoria {
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--color-acento);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.proyecto-info h3 {
+  font-size: var(--t-base);
+  font-weight: 600;
+  margin-bottom: var(--s-xs);
+  letter-spacing: 0;
+}
+
+.proyecto-desc { font-size: var(--t-sm); line-height: 1.5; margin-bottom: var(--s-sm); }
+
+.proyecto-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--s-xs);
+  border-top: 0.5px solid var(--color-borde);
+}
+.proyecto-footer time {
+  font-size: var(--t-xs);
+  color: var(--color-texto-3);
+}
+
+.proyecto-link {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--color-acento);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r-sm);
+  border: 0.5px solid rgba(242,78,41,0.3);
+  transition: all var(--ease);
+}
+.proyecto-link:hover {
+  background: var(--color-acento);
+  color: var(--color-bg);
+}
+
+
+/* ================================================================
+   12. EXPERIENCIA — timeline 2 cols + edu cards
+   Figma: Experience frame
+   ================================================================ */
+.experiencia {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.experiencia-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-xl);
+  align-items: start;
+}
+
+/* Timeline laboral */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-md);
+  margin-top: var(--s-lg);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: var(--s-sm);
+  position: relative;
+  padding-bottom: var(--s-md);
+}
+
+/* Línea vertical conectora */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 3px; top: 20px; bottom: 0;
+  width: 1px;
+  background: var(--color-borde);
+}
+.timeline-item:last-child::after { display: none; }
+
+/* Punto acento */
+.timeline-punto {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-acento);
+  margin-top: 4px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-fecha {
+  font-size: var(--t-xs);
+  color: var(--color-texto-3);
+  display: block;
+  margin-bottom: 6px;
+  font-style: normal;
+}
+
+.timeline-contenido h3 {
+  font-size: var(--t-base);
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0;
+  color: var(--color-texto);
+}
+
+.timeline-empresa {
+  font-size: var(--t-sm);
+  color: var(--color-acento-dark);
+  margin-bottom: 6px;
+  font-style: normal;
+}
+
+.timeline-logro {
+  display: inline-block;
+  font-size: var(--t-xs);
+  color: var(--color-texto-2);
+  background: rgba(242,78,41,0.08);
+  border: 0.5px solid rgba(242,78,41,0.2);
+  padding: 3px 10px;
+  border-radius: var(--r-sm);
+  margin-top: var(--s-xs);
+}
+
+/* Educación — columna derecha */
+.edu-titulo {
+  font-size: var(--t-xl);
+  margin-bottom: var(--s-lg);
+  padding-bottom: var(--s-sm);
+  border-bottom: 0.5px solid var(--color-borde);
+}
+
+.edu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-card {
+  padding: var(--s-md) var(--s-sm);
+  border-bottom: 0.5px solid var(--color-borde);
+  transition: background var(--ease);
+}
+.edu-card:first-child { border-top: 0.5px solid var(--color-borde); }
+.edu-card:hover { background: var(--color-bg-card); }
+
+.edu-fecha {
+  font-size: var(--t-xs);
+  color: var(--color-texto-3);
+  display: block;
+  margin-bottom: 6px;
+  font-style: normal;
+}
+
+.edu-card h3 {
+  font-size: var(--t-base);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 4px;
+}
+
+.edu-inst {
+  font-size: var(--t-sm);
+  color: var(--color-texto-3);
+}
+
+
+/* ================================================================
+   13. HERRAMIENTAS — grid 4x2 tool cards
+   Figma: Tools frame
+   ================================================================ */
+.herramientas {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-sm);
+  margin-top: var(--s-lg);
+}
+
+.tool-card {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-borde);
+  border-radius: var(--r-lg);
+  padding: var(--s-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-xs);
+  transition: border-color var(--ease), transform var(--ease);
+}
+.tool-card:hover { border-color: var(--color-borde-2); transform: translateY(-4px); }
+
+.tool-icono { font-size: 2rem; margin-bottom: 6px; }
+
+.tool-card h3 {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.tool-card p { font-size: var(--t-xs); color: var(--color-texto-3); }
+
+
+/* ================================================================
+   14. CONTACTO — sección centrada, headline display
+   Figma: Contact frame
+   ================================================================ */
+.contacto {
+  padding: var(--s-2xl) var(--pad-h);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.contacto-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-md);
+}
+
+.contacto-eyebrow { justify-content: center; }
+.contacto-eyebrow::before { display: none; }
+
+.contacto-titulo {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+.contacto-desc {
+  font-size: var(--t-md);
+  max-width: 480px;
+  text-align: center;
+}
+
+.contacto-ctas {
+  display: flex;
+  gap: var(--s-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--s-sm);
+}
+
+.contacto-nav {
+  display: flex;
+  gap: var(--s-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--s-sm);
+}
+.contacto-nav a {
+  font-size: var(--t-base);
+  color: var(--color-texto-2);
+  transition: color var(--ease);
+}
+.contacto-nav a:hover { color: var(--color-texto); }
+
+/* Datos de contacto con <address> */
+.contacto-datos {
+  display: flex;
+  gap: var(--s-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+  font-style: normal;
+  margin-top: var(--s-sm);
+  padding-top: var(--s-md);
+  border-top: 0.5px solid var(--color-borde);
+  width: 100%;
+}
+.contacto-datos span,
+.contacto-datos a {
+  font-size: var(--t-sm);
+  color: var(--color-texto-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.contacto-datos a { transition: color var(--ease); }
+.contacto-datos a:hover { color: var(--color-acento); }
+
+
+/* ================================================================
+   15. FOOTER — Figma: Footer
+   ================================================================ */
+.site-footer {
+  border-top: 0.5px solid var(--color-borde);
+  padding: var(--s-lg) var(--pad-h);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  gap: var(--s-md);
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-family: var(--fuente-display);
+  font-size: var(--t-xl);
+  font-weight: 700;
+  color: var(--color-texto);
+  letter-spacing: -0.02em;
+  transition: color var(--ease);
+}
+.footer-logo:hover { color: var(--color-acento); }
+
+.footer-copy { font-size: var(--t-xs); color: var(--color-texto-3); }
+
+
+/* ================================================================
+   16. RESPONSIVO — Lección 7: Media queries mobile-first
+   Breakpoints: mobile <768px, tablet 768-1024px, desktop >1024px
+   ================================================================ */
+
+/* — Mobile: max 768px — */
+@media (max-width: 768px) {
+
+  :root {
+    --pad-h:  1.25rem;  /* 20px padding lateral */
+    --s-2xl:  4rem;     /* reducir espaciado de secciones */
+    --t-hero: 2.5rem;   /* H1 más pequeño en mobile */
+    --t-4xl:  2rem;     /* H2 más pequeño */
+  }
+
+  .titulo-outline     { font-size: var(--t-hero); }
+  .titulo-outline--sm { font-size: calc(var(--t-hero) * 0.65); }
+
+  /* Nav: mostrar hamburger, ocultar links */
+  .nav-principal { padding: 0 var(--pad-h); }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: var(--color-bg-2);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--s-md) var(--pad-h);
+    gap: var(--s-md);
+    border-bottom: 0.5px solid var(--color-borde);
+    z-index: 99;
+  }
+  .nav-links.abierto { display: flex; }
+  .nav-hamburger     { display: flex; }
+
+  /* Hero: 1 columna apilada */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: calc(var(--s-lg) + 64px);
+    gap: var(--s-lg);
+  }
+  .foto-perfil    { max-width: 240px; margin: 0 auto; aspect-ratio: 1; border-radius: 50%; }
+  .stat-flotante  { display: none; } /* ocultar en mobile */
+  .hero-ctas      { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .hero-especialidades { gap: var(--s-md); }
+
+  /* Marquee mantiene el scroll */
+  .marquee-track { animation-duration: 20s; }
+
+  /* Sobre mí: 1 columna */
+  .sobre-mi-inner { grid-template-columns: 1fr; }
+  .stats-grid     { grid-template-columns: 1fr 1fr; }
+
+  /* Servicios: 1 columna */
+  .servicios-header { flex-direction: column; align-items: flex-start; }
+  .servicios-grid   { grid-template-columns: 1fr; }
+
+  /* Portafolio: 1 columna */
+  .portafolio-header { flex-direction: column; align-items: flex-start; }
+  .proyectos-grid    { grid-template-columns: 1fr; }
+
+  /* Experiencia: 1 columna */
+  .experiencia-inner { grid-template-columns: 1fr; }
+
+  /* Tools: 2 columnas */
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Contacto: ajustes */
+  .contacto-nav     { gap: var(--s-md); }
+  .contacto-ctas    { flex-direction: column; width: 100%; }
+  .contacto-ctas .btn { width: 100%; justify-content: center; }
+  .contacto-datos   { flex-direction: column; align-items: center; gap: var(--s-sm); }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* — Tablet: 769px–1024px — */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  :root {
+    --pad-h:  2.5rem;  /* 40px */
+    --t-hero: 3.5rem;  /* H1 intermedio */
+    --t-4xl:  2.5rem;  /* H2 intermedio */
+  }
+
+  .titulo-outline     { font-size: var(--t-hero); }
+  .titulo-outline--sm { font-size: calc(var(--t-hero) * 0.6); }
+
+  .hero       { gap: var(--s-md); }
+  .foto-perfil { max-width: 340px; }
+
+  .sobre-mi-inner   { gap: var(--s-lg); }
+  .servicios-grid   { grid-template-columns: repeat(2, 1fr); }
+  .proyectos-grid   { grid-template-columns: repeat(2, 1fr); }
+  .experiencia-inner { gap: var(--s-lg); }
+  .tools-grid       { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* ================================================================
+   17. ACCESIBILIDAD & ESTADOS
+   ================================================================ */
+
+/* Focus visible con color acento — WCAG 2.1 AA */
+:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* Reducción de movimiento para usuarios con condiciones vestibulares */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
